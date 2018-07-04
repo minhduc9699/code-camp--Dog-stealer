@@ -28,8 +28,14 @@ class Dog(GameObject):
         self.vx, self.vy = self.velocity
         self.y += self.vy
         self.x += self.vx
-        # if self.x >= 1280 or self.x <= 0 or self.y >= 720 or self.y <=0:
-        #   self.decide_movement()
+        if self.x >= 1270:
+            self.x = 1270
+        if self.x <= 10:
+            self.x = 10
+        if self.y >= 710:
+            self.y = 710
+        if self.y <=10:
+            self.y = 10
 
     def return_to_player(self):
         if self.is_active and self.returning:

@@ -6,6 +6,7 @@ from input_manager.input_manager import InputManager
 from enemy.enemy import Enemy
 from dog.dog import Dog
 from enemy.enemy_spawner import EnemySpawner
+from dog.dog_spawner import DogSpawner
 BG_COLOR = (125, 125, 0)
 
 #1. init pygame
@@ -19,13 +20,12 @@ input_manager = InputManager()
 hole = Hole(680, 360)
 
 player = Player(2, 3, input_manager)
-dog = Dog(50, 50)
-
+dog_spawner = DogSpawner(500, 500)
 enemy_spawner1 = EnemySpawner(200,300)
 enemy_spawner2 = EnemySpawner(100,100)
 game_object.add(player)
-game_object.add(dog)
 game_object.add(hole)
+game_object.add(dog_spawner)
 game_object.add(enemy_spawner1)
 game_object.add(enemy_spawner2)
 

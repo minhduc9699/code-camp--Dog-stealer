@@ -129,3 +129,4 @@ class Player(GameObject):
             dog = game_object.collide_with(self.box_collider, Dog)
             if dog is not None and dog.returning:
                 dog.deactivate()
+
