@@ -4,49 +4,44 @@ import game_object
 from game_object import GameObject
 from frame_counter import FrameCounter
 
+
 class Player(GameObject):
-  def __init__(self, x, y, input_manager):
-    GameObject.__init__(self, x, y)
-    self.input_manager = input_manager
-    self.image = pygame.image.load("./images/player/player1.png")
-    self.shoot_lock = False
-    self.counter = FrameCounter(20)
+    def __init__(self, x, y, input_manager):
+        GameObject.__init__(self, x, y)
+        self.input_manager = input_manager
+        self.image = pygame.image.load("./images/player/player1.png")
+        self.shoot_lock = False
+        self.counter = FrameCounter(20)
 
+    def update(self):
+        self.move()
+        self.shoot()
 
-  def update(self):
-    self.move()
-    self.shoot()
+    def move(self):
+        dx = 0
+        dy = 0
+        step = 7
+        if self.input_manager.up_pressed:
+            dy -= step
+        if self.input_manager.down_pressed:
+            dy += step
+        if self.input_manager.left_pressed:
+            dx -= step
+        if self.input_manager.right_pressed:
+            dx += step
+        self.x += dx
+        self.y += dy
 
+    def shoot(self):
+        if self.input_manager.x_pressed and not self.shoot_lock:
+            bullet = game_object.recycle(PlayerBullet, self.x, self.y - 25)
+            self.shoot_lock = True
 
-  def move(self):
-    dx = 0
-    dy = 0
-    step = 7
-    if self.input_manager.up_pressed:
-      dy -= step
-    if self.input_manager.down_pressed:
-      dy += step
-    if self.input_manager.left_pressed:
-      dx -= step
-    if self.input_manager.right_pressed:
-      dx += step
-    self.x += dx
-    self.y += dy
-
-
-  def shoot(self):
-    if self.input_manager.x_pressed and not self.shoot_lock:
-      bullet = game_object.recycle(PlayerBullet, self.x, self.y - 25)
-      self.shoot_lock = True
-
-    if self.shoot_lock:
-      self.counter.run()
-      if self.counter.expired:
-        self.shoot_lock = False 
-        self.counter.reset()
-    
-
-      
+        if self.shoot_lock:
+            self.counter.run()
+            if self.counter.expired:
+                self.shoot_lock = False
+                self.counter.reset()
 
 
 import game_object
@@ -56,6 +51,7 @@ from player.Shot1.shot1 import Shot1
 from quick_math import get_distance
 from physic.box_collider import BoxCollider
 from dog.dog import Dog
+
 
 class Player(GameObject):
     def __init__(self, x, y, input_manager):
@@ -67,7 +63,6 @@ class Player(GameObject):
         self.shoot_lock1 = False
         self.shoot_lock2 = False
         self.box_collider = BoxCollider(70, 70)
-
 
     def update(self):
         GameObject.update(self)

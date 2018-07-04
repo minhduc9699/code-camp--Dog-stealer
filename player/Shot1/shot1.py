@@ -29,11 +29,11 @@ class Shot1(GameObject):
         self.vx, self.vy = self.velocity
         self.y += self.vy
         self.x += self.vx
-        
+
         self.counter.run()
         if self.counter.expired:
-          self.returning = True
-          self.counter.reset()
+            self.returning = True
+            self.counter.reset()
 
     def deactivate_if_needed(self):
         if self.y < -200 or self.y > 900:
