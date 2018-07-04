@@ -5,29 +5,51 @@ from game_object import GameObject
 from frame_counter import FrameCounter
 from random import randint
 
+from quick_math import get_distance
+
+
 class Enemy(GameObject):
-    def __init__(self,x,y):
-        GameObject.__init__(self,x,y)
+    def __init__(self, x, y):
+        GameObject.__init__(self, x, y)
         self.image = pygame.image.load("images/enemy/bacteria1.png")
-        self.box_collider = BoxCollider(40,40)
+        self.box_collider = BoxCollider(40, 40)
         self.counter = FrameCounter(70)
+        self.returning = False
+        self.velocity = (0, 0)
+        
 
     def update(self):
         GameObject.update(self)
-        self.follow_player()
- 
-    def follow_player(self):
-        px,py = game_object.position
-        if (self.x < px):
-            self.x += 1
-            if (self.y < py):
-                self.y += 1
-            else:
-                self.y -= 1
-        else:
-            self.x -= 1
-            if (self.y < py):
-                self.y +=1
-            else:
-                self.y -= 1
+        self.move()
 
+    def move(self):
+        try:
+            px, py = game_object.position
+            distance = (get_distance((self.x, self.y),
+                                     (px, py)))
+            self.velocity = ((-px + self.x) / distance * -1,
+                             (-py + self.y) / distance * -1)
+        except ZeroDivisionError:
+            pass
+
+        self.return_to_player()
+
+        vx, vy = self.velocity
+        self.x += vx
+        self.y += vy
+
+    def return_to_player(self):
+        if self.is_active and self.returning:
+            try:
+                px, py = game_object.position
+                distance = (get_distance((self.x, self.y),
+                                         (px, py)))
+                # print(distance)
+                self.velocity = ((-px + self.x) / distance * -8,
+                                 (-py + self.y) / distance * -8)
+            except ZeroDivisionError:
+                pass
+
+    def clean(self):
+        self.velocity = (0, 0)
+        self.returning = False

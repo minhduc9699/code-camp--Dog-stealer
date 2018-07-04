@@ -7,6 +7,7 @@ from dog.dog import Dog
 from quick_math import get_distance
 from frame_counter import FrameCounter
 # from game_object import position
+from enemy.enemy import Enemy
 
 
 class Shot1(GameObject):
@@ -43,12 +44,17 @@ class Shot1(GameObject):
 
     def physics(self):
         if self.is_active:
-            hit_object = game_object.collide_with(self.box_collider, Dog)
-            if hit_object is not None:
+            dog = game_object.collide_with(self.box_collider, Dog)
+            if dog is not None:
                 # self.deactivate()
                 # dog.deactivate()
                 self.returning = True
-                hit_object.returning = True
+                dog.returning = True
+
+            enemy = game_object.collide_with(self.box_collider, Enemy)
+            if enemy is not None:
+                self.returning = True
+                enemy.returning = True
 
     def return_to_player(self):
         if self.is_active and self.returning:
@@ -56,8 +62,8 @@ class Shot1(GameObject):
                 px, py = game_object.position
                 distance = (get_distance((self.x, self.y),
                                          (px, py)))
-                self.velocity = ((-px + self.x) / distance * -5,
-                                 (-py + self.y) / distance * -5)
+                self.velocity = ((-px + self.x) / distance * -10,
+                                 (-py + self.y) / distance * -10)
             except ZeroDivisionError:
                 pass
 
