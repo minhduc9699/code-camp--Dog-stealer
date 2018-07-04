@@ -44,6 +44,7 @@ class Shot1(GameObject):
                 # dog.deactivate()
                 self.returning = True
                 dog.returning = True
+                dog.stun_timer.reset()
 
             enemy = game_object.collide_with(self.box_collider, Enemy)
             if enemy is not None:
@@ -64,3 +65,4 @@ class Shot1(GameObject):
     def clean(self):
         self.returning = False
         self.velocity = (0, 0)
+        

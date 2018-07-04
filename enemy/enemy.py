@@ -18,13 +18,17 @@ class Enemy(GameObject):
         self.velocity = (0, 0)
         self.pushed = False
 
+        # not stun
+        self.stun_timer = FrameCounter(20)
+        self.stun_timer.count = 20
+
     def update(self):
         GameObject.update(self)
         self.move()
 
     def move(self):
 
-        if not self.pushed:
+        if self.stun_timer.expired:
             try:
                 px, py = game_object.position
                 distance = (get_distance((self.x, self.y),
@@ -33,10 +37,14 @@ class Enemy(GameObject):
                                  (-py + self.y) / distance * -1)
             except ZeroDivisionError:
                 pass
+        else:
+            self.stun_timer.run()
+            print(self.stun_timer.count)
 
         self.return_to_player()
 
         vx, vy = self.velocity
+        # print(self.velocity)
         self.x += vx
         self.y += vy
 
@@ -47,8 +55,8 @@ class Enemy(GameObject):
                 distance = (get_distance((self.x, self.y),
                                          (px, py)))
                 # print(distance)
-                self.velocity = ((-px + self.x) / distance * -5,
-                                 (-py + self.y) / distance * -5)
+                self.velocity = ((-px + self.x) / distance * -4,
+                                 (-py + self.y) / distance * -4)
             except ZeroDivisionError:
                 pass
 
