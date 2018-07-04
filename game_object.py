@@ -1,6 +1,6 @@
 import pygame
 game_object = []
-
+position = (0, 0)
 
 def add(obj):
   game_object.append(obj)
@@ -32,9 +32,7 @@ def recycle(obj_type, x, y):
 
   new_obj = obj_type(x, y)
   add(new_obj)
-    
   return new_obj
-
 
 
 class GameObject:
@@ -62,4 +60,8 @@ class GameObject:
 
   def deactivate(self):
     self.is_active = False
+    self.clean()
+
+  def clean(self):
+    pass
 
