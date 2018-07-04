@@ -17,7 +17,7 @@ class Player(GameObject):
         self.counter2 = FrameCounter(120)
         self.has_shoot1 = True
         self.has_shoot2 = True
-        self.has_dog = False
+        self.dog_count = 0
         self.box_collider = BoxCollider(70, 70)
 
 
@@ -56,6 +56,7 @@ class Player(GameObject):
                 shot1 = game_object.recycle(Shot1, self.x, self.y)
                 shot1.velocity = ((self.input_manager.mouse_x - self.x) / distance * 5,
                                   (self.input_manager.mouse_y - self.y) / distance * 5)
+                shot1.counter.reset()
             except ZeroDivisionError:
                 # game_object.add(shot1)
                 pass
@@ -70,9 +71,10 @@ class Player(GameObject):
             try:
                 distance = (get_distance((self.x, self.y),
                                          (self.input_manager.mouse_x, self.input_manager.mouse_y)))
-                shot2 = game_object.recycle(Shot2, self.x, self.y)
+                shot2 = game_object.recycle(Shot2, self.x, self.y -10)
                 shot2.velocity = ((self.input_manager.mouse_x - self.x) / distance * 5,
                                   (self.input_manager.mouse_y - self.y) / distance * 5)
+                shot2.counter.reset()
             except ZeroDivisionError:
                 # game_object.add(shot1)
                 pass
@@ -86,6 +88,7 @@ class Player(GameObject):
                 
             dog = game_object.collide_with(self.box_collider, Dog)
             if dog is not None and dog.returning:
+                self.dog_count += 1
                 dog.deactivate()
 
             shot2 = game_object.collide_with(self.box_collider, Shot2)

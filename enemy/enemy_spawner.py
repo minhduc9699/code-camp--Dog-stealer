@@ -8,7 +8,7 @@ import game_object
 class EnemySpawner(GameObject):
     def __init__(self,spawn_x,spawn_y):
         GameObject.__init__(self, 0, 0)
-        self.counter = FrameCounter(300)
+        self.counter = FrameCounter(700)
         self.spawn_x = spawn_x
         self.spawn_y = spawn_y
 

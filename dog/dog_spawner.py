@@ -7,7 +7,7 @@ from dog.dog import Dog
 class DogSpawner(GameObject):
   def __init__(self, x, y):
     GameObject.__init__(self, x, y)
-    self.frame_counter = FrameCounter(400)
+    self.frame_counter = FrameCounter(700)
 
   def update(self):
     self.frame_counter.run()

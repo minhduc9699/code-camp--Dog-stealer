@@ -15,7 +15,7 @@ class Dog(GameObject):
         self.box_collider = BoxCollider(100, 100)
         self.returning = False
         self.velocity = (0, 0)
-        self.counter = FrameCounter(20)
+        self.counter = FrameCounter(100)
         self.spawn_lock = False
         self.pushed = False
 
@@ -58,7 +58,6 @@ class Dog(GameObject):
     def decide_movement(self):
         if not self.spawn_lock:
             self.spawn_lock = True
-            self.velocity = (random.randint(-5, 5), random.randint(-5, 5))
 
         if self.spawn_lock:
             self.counter.run()

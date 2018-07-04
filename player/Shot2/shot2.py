@@ -23,7 +23,6 @@ class Shot2(GameObject):
     def update(self):
         GameObject.update(self)
         self.move()
-        self.deactivate_if_needed()
         self.physics()
         self.return_to_player()
 
@@ -36,13 +35,6 @@ class Shot2(GameObject):
         if self.counter.expired:
             self.returning = True
             self.counter.reset()
-
-    def deactivate_if_needed(self):
-        if self.y < -200 or self.y > 900:
-            self.deactivate()
-        if self.x < -200 or self.x > 1500:
-            self.deactivate()
-
     def physics(self):
         if self.is_active:
 

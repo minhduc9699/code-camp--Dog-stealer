@@ -19,10 +19,10 @@ class Shot1(GameObject):
         self.returning = False
         self.counter = FrameCounter(120)
 
+
     def update(self):
         GameObject.update(self)
         self.move()
-        self.deactivate_if_needed()
         self.physics()
         self.return_to_player()
 
@@ -30,17 +30,11 @@ class Shot1(GameObject):
         self.vx, self.vy = self.velocity
         self.y += self.vy
         self.x += self.vx
-
+        # self.counter.reset()
         self.counter.run()
         if self.counter.expired:
             self.returning = True
             self.counter.reset()
-
-    def deactivate_if_needed(self):
-        if self.y < -200 or self.y > 900:
-            self.deactivate()
-        if self.x < -200 or self.x > 1500:
-            self.deactivate()
 
     def physics(self):
         if self.is_active:

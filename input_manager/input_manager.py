@@ -39,7 +39,6 @@ class InputManager:
           self.left_mouse_clicked = True
         else: 
           self.left_mouse_clicked = False
-        
         if mr:
           self.right_mouse_clicked = True
         else:
