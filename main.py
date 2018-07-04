@@ -10,12 +10,8 @@ pygame.init()
 size = (1024, 600)
 canvas = pygame.display.set_mode(size)
 input_manager = InputManager()
-
-
-
-
-
 clock = pygame.time.Clock()
+
 loop = True
 while loop:
   #loop events
@@ -24,10 +20,8 @@ while loop:
     if event.type == pygame.QUIT:
       loop = False
     input_manager.update(event)
-  game_object.update()
-
   
-
+  game_object.update()
   canvas.fill(BG_COLOR)
 
   game_object.render(canvas)

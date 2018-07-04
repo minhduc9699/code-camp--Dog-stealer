@@ -22,11 +22,6 @@ def collide_with(box_collider ,obj_type):
       
   return None
 
-
-
-  
-
-
 def recycle(obj_type, x, y):
   for obj in game_object:
     if type(obj) == obj_type and not obj.is_active:
