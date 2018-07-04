@@ -6,6 +6,7 @@ from player.Shot1.shot1 import Shot1
 from quick_math import get_distance
 from physic.box_collider import BoxCollider
 from dog.dog import Dog
+from player.Shot2.shot2 import Shot2
 
 class Player(GameObject):
     def __init__(self, x, y, input_manager):
@@ -62,9 +63,19 @@ class Player(GameObject):
         # pass
 
     def shoot_right(self):
-        if self.input_manager.right_mouse_clicked and not self.has_shoot2:
+        if self.input_manager.right_mouse_clicked and self.has_shoot2:
             self.has_shoot2 = False
-            # print('right Hitu')
+            # print('left hitu')
+            # game_object.recycle(Shot1)
+            try:
+                distance = (get_distance((self.x, self.y),
+                                         (self.input_manager.mouse_x, self.input_manager.mouse_y)))
+                shot2 = game_object.recycle(Shot2, self.x, self.y)
+                shot2.velocity = ((self.input_manager.mouse_x - self.x) / distance * 5,
+                                  (self.input_manager.mouse_y - self.y) / distance * 5)
+            except ZeroDivisionError:
+                # game_object.add(shot1)
+                pass
         
     def physics(self):
         if self.is_active:
@@ -76,5 +87,8 @@ class Player(GameObject):
             dog = game_object.collide_with(self.box_collider, Dog)
             if dog is not None and dog.returning:
                 dog.deactivate()
-                self.has_dog = True
 
+            shot2 = game_object.collide_with(self.box_collider, Shot2)
+            if shot2 is not None and shot2.returning:
+                self.has_shoot2 = True
+                shot2.deactivate()

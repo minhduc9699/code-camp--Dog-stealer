@@ -62,8 +62,8 @@ class Shot1(GameObject):
                 px, py = game_object.position
                 distance = (get_distance((self.x, self.y),
                                          (px, py)))
-                self.velocity = ((-px + self.x) / distance * -10,
-                                 (-py + self.y) / distance * -10)
+                self.velocity = ((-px + self.x) / distance * -5,
+                                 (-py + self.y) / distance * -5)
             except ZeroDivisionError:
                 pass
 
