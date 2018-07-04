@@ -29,15 +29,16 @@ class Shot1(GameObject):
         self.vx, self.vy = self.velocity
         self.y += self.vy
         self.x += self.vx
+        
         self.counter.run()
         if self.counter.expired:
           self.returning = True
           self.counter.reset()
 
     def deactivate_if_needed(self):
-        if self.y < 0 or self.y > 720:
+        if self.y < -200 or self.y > 900:
             self.deactivate()
-        if self.x < 0 or self.x > 1280:
+        if self.x < -200 or self.x > 1500:
             self.deactivate()
 
     def physics(self):
