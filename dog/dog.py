@@ -43,8 +43,8 @@ class Dog(GameObject):
                 px, py = game_object.position
                 distance = (get_distance((self.x, self.y),
                                          (px, py)))
-                self.velocity = ((-px + self.x) / distance * -5,
-                                 (-py + self.y) / distance * -5)
+                self.velocity = ((-px + self.x) / distance * -8,
+                                 (-py + self.y) / distance * -8)
             except ZeroDivisionError:
                 pass
 
@@ -53,8 +53,6 @@ class Dog(GameObject):
         self.returning = False
 
     def decide_movement(self):
-           
-        
         if not self.spawn_lock:
           self.spawn_lock = True
           self.velocity = (random.randint(-5, 5), random.randint(-5, 5))
