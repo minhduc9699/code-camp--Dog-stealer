@@ -66,19 +66,23 @@ class Player(GameObject):
     def shoot_right(self):
         if self.input_manager.right_mouse_clicked and self.has_shoot2:
             self.has_shoot2 = False
-            # print('left hitu')
-            # game_object.recycle(Shot1)
+            
             try:
                 distance = (get_distance((self.x, self.y),
                                          (self.input_manager.mouse_x, self.input_manager.mouse_y)))
                 shot2 = game_object.recycle(Shot2, self.x, self.y -10)
                 shot2.velocity = ((self.input_manager.mouse_x - self.x) / distance * 5,
                                   (self.input_manager.mouse_y - self.y) / distance * 5)
-                shot2.counter.reset()
+                shot2.time_before_disappear.reset()
             except ZeroDivisionError:
                 # game_object.add(shot1)
                 pass
-        
+        if self.has_shoot2 == False:
+            self.counter2.run()
+            if self.counter2.expired:
+                self.has_shoot2 = True
+                self.counter2.reset()
+
     def physics(self):
         if self.is_active:
             shot1 = game_object.collide_with(self.box_collider, Shot1)
@@ -91,7 +95,4 @@ class Player(GameObject):
                 self.dog_count += 1
                 dog.deactivate()
 
-            shot2 = game_object.collide_with(self.box_collider, Shot2)
-            if shot2 is not None and shot2.returning:
-                self.has_shoot2 = True
-                shot2.deactivate()
+            

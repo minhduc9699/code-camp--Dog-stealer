@@ -19,22 +19,25 @@ class Dog(GameObject):
         self.spawn_lock = False
 
         # not stun
-        self.stun_timer = FrameCounter(10)
-        self.stun_timer.count = 10
+        self.stun_timer = FrameCounter(90)
+        self.stun_timer.count = 90
 
     def update(self):
         GameObject.update(self)
         self.move()
+        if not self.pushed:
+            self.decide_movement()
         self.return_to_player()
 
     def move(self):
 
         if self.stun_timer.expired:
             # input movement here
-            self.velocity = (0, 0)
+            self.velocity = (0,0)
             pass
         else:
             self.stun_timer.run()
+
 
         self.vx, self.vy = self.velocity
         self.y += self.vy
