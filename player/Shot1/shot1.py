@@ -5,7 +5,7 @@ from game_object import GameObject
 from physic.box_collider import BoxCollider
 from dog.dog import Dog
 from quick_math import get_distance
-
+from frame_counter import FrameCounter
 # from game_object import position
 
 
@@ -16,6 +16,7 @@ class Shot1(GameObject):
         self.box_collider = BoxCollider(40, 40)
         self.velocity = (0, 0)
         self.returning = False
+        self.counter = FrameCounter(120)
 
     def update(self):
         GameObject.update(self)
@@ -28,6 +29,10 @@ class Shot1(GameObject):
         self.vx, self.vy = self.velocity
         self.y += self.vy
         self.x += self.vx
+        self.counter.run()
+        if self.counter.expired:
+          self.returning = True
+          self.counter.reset()
 
     def deactivate_if_needed(self):
         if self.y < 0 or self.y > 720:
@@ -54,7 +59,7 @@ class Shot1(GameObject):
                                  (-py + self.y) / distance * -5)
             except ZeroDivisionError:
                 pass
-    
+
     def clean(self):
         self.returning = False
         self.velocity = (0, 0)

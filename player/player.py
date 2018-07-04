@@ -12,11 +12,12 @@ class Player(GameObject):
         GameObject.__init__(self, x, y)
         self.input_manager = input_manager
         self.image = pygame.image.load("images/player/player1.png")
-        self.counter1 = FrameCounter(20)
-        self.counter2 = FrameCounter(20)
+        self.counter1 = FrameCounter(120)
+        self.counter2 = FrameCounter(120)
         self.shoot_lock1 = False
         self.shoot_lock2 = False
         self.box_collider = BoxCollider(70, 70)
+
 
     def update(self):
         GameObject.update(self)
