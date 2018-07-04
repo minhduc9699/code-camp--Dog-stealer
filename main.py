@@ -1,5 +1,6 @@
 import pygame
 import game_object
+from hole.hole import Hole
 from input_manager.input_manager import InputManager
 BG_COLOR = (125, 125, 0)
 
@@ -7,10 +8,11 @@ BG_COLOR = (125, 125, 0)
 pygame.init()
 
 #2. setup screen
-size = (1024, 600)
+size = (1280, 720)
 canvas = pygame.display.set_mode(size)
 input_manager = InputManager()
-
+hole = Hole(300,200)
+game_object.add(hole)
 
 
 
