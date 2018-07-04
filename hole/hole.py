@@ -9,7 +9,7 @@ class Hole(GameObject):
   def __init__(self, x, y):
     GameObject.__init__(self, x, y)
     self.image = pygame.image.load("./images/hole.png")
-    self.box_collider = BoxCollider(35, 35)
+    self.box_collider = BoxCollider(50, 50)
 
   def update(self):
     GameObject.update(self)
@@ -22,7 +22,8 @@ class Hole(GameObject):
       if enemy is not None:
         enemy.deactivate()
       if player is not None:
-        player.image = pygame.image.load("./images/enemy/virrut.png")
+        # player.image = pygame.image.load("./images/enemy/virrut.png")
+        pass
         
 
 

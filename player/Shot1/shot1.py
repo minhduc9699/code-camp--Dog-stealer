@@ -17,7 +17,7 @@ class Shot1(GameObject):
         self.box_collider = BoxCollider(40, 40)
         self.velocity = (0, 0)
         self.returning = False
-        self.counter = FrameCounter(120)
+        self.counter = FrameCounter(60)
 
 
     def update(self):

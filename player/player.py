@@ -86,10 +86,10 @@ class Player(GameObject):
                 self.has_shoot1 = True
                 shot1.deactivate()
                 
-            dog = game_object.collide_with(self.box_collider, Dog)
-            if dog is not None and dog.returning:
-                self.dog_count += 1
-                dog.deactivate()
+            # dog = game_object.collide_with(self.box_collider, Dog)
+            # if dog is not None and dog.returning:
+            #     self.dog_count += 1
+            #     dog.deactivate()
 
             shot2 = game_object.collide_with(self.box_collider, Shot2)
             if shot2 is not None and shot2.returning:

@@ -18,7 +18,7 @@ class Shot2(GameObject):
         self.box_collider = BoxCollider(40, 40)
         self.velocity = (0, 0)
         self.returning = False
-        self.counter = FrameCounter(120)
+        self.counter = FrameCounter(60)
 
     def update(self):
         GameObject.update(self)
@@ -39,14 +39,14 @@ class Shot2(GameObject):
         if self.is_active:
 
             dog = game_object.collide_with(self.box_collider, Dog)
-            if dog is not None:
-                # self.deactivate()
-                # dog.deactivate()
-                distance1 = get_distance((self.x, self.y), (dog.x, dog.y))
-                self.returning = True
-                dog.velocity = ((dog.x - self.x) / distance1 *
-                                5, (dog.y - self.y) / distance1 * 5)
-                dog.pushed = True
+            # if dog is not None:
+            #     # self.deactivate()
+            #     # dog.deactivate()
+            #     distance1 = get_distance((self.x, self.y), (dog.x, dog.y))
+            #     self.returning = True
+            #     dog.velocity = ((dog.x - self.x) / distance1 *
+            #                     5, (dog.y - self.y) / distance1 * 5)
+            #     dog.pushed = True
 
             enemy = game_object.collide_with(self.box_collider, Enemy)
             if enemy is not None:

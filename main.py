@@ -19,7 +19,7 @@ canvas = pygame.display.set_mode(size)
 input_manager = InputManager()
 
 hole = Hole(680, 360)
-shop = Shop(1200, 240)
+shop = Shop(1200, 360)
 player = Player(2, 3, input_manager)
 dog_spawner = DogSpawner(500, 500)
 # enemy_spawner1 = EnemySpawner(200,300)
