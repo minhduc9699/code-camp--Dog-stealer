@@ -17,7 +17,7 @@ class Shot2(GameObject):
         self.image = pygame.image.load("images/player-bullet.png")
         self.box_collider = BoxCollider(60, 60)
         self.velocity = (0, 0)
-        self.time_before_disappear = FrameCounter(10)
+        self.time_before_disappear = FrameCounter(20)
 
     def update(self):
         GameObject.update(self)
