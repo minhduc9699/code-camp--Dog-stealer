@@ -16,6 +16,7 @@ class Player(GameObject):
         self.counter2 = FrameCounter(120)
         self.has_shoot1 = True
         self.has_shoot2 = True
+        self.has_dog = False
         self.box_collider = BoxCollider(70, 70)
 
 
@@ -75,4 +76,5 @@ class Player(GameObject):
             dog = game_object.collide_with(self.box_collider, Dog)
             if dog is not None and dog.returning:
                 dog.deactivate()
+                self.has_dog = True
 

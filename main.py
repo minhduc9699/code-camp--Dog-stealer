@@ -7,6 +7,7 @@ from enemy.enemy import Enemy
 from dog.dog import Dog
 from enemy.enemy_spawner import EnemySpawner
 from dog.dog_spawner import DogSpawner
+from shop.shop import Shop
 BG_COLOR = (125, 125, 0)
 
 #1. init pygame
@@ -18,7 +19,7 @@ canvas = pygame.display.set_mode(size)
 input_manager = InputManager()
 
 hole = Hole(680, 360)
-
+shop = Shop(1200, 700)
 player = Player(2, 3, input_manager)
 dog_spawner = DogSpawner(500, 500)
 enemy_spawner1 = EnemySpawner(200,300)
@@ -28,6 +29,7 @@ game_object.add(hole)
 game_object.add(dog_spawner)
 game_object.add(enemy_spawner1)
 game_object.add(enemy_spawner2)
+game_object.add(shop)
 
 clock = pygame.time.Clock()
 
