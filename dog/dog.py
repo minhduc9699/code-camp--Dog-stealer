@@ -17,11 +17,13 @@ class Dog(GameObject):
         self.velocity = (0, 0)
         self.counter = FrameCounter(20)
         self.spawn_lock = False
+        self.pushed = False
 
     def update(self):
         GameObject.update(self)
         self.move()
-        self.decide_movement()
+        if not self.pushed:
+            self.decide_movement()
         self.return_to_player()
 
     def move(self):
@@ -37,22 +39,23 @@ class Dog(GameObject):
                 px, py = game_object.position
                 distance = (get_distance((self.x, self.y),
                                          (px, py)))
-                self.velocity = ((-px + self.x) / distance * -8,
-                                 (-py + self.y) / distance * -8)
+                self.velocity = ((-px + self.x) / distance * -5,
+                                 (-py + self.y) / distance * -5)
             except ZeroDivisionError:
                 pass
 
     def clean(self):
         self.velocity = (0, 0)
         self.returning = False
+        self.pushed = False
 
     def decide_movement(self):
         if not self.spawn_lock:
-          self.spawn_lock = True
-          self.velocity = (random.randint(-5, 5), random.randint(-5, 5))
+            self.spawn_lock = True
+            self.velocity = (random.randint(-5, 5), random.randint(-5, 5))
 
         if self.spawn_lock:
-          self.counter.run()
-          if self.counter.expired:
-            self.spawn_lock = False
-            self.counter.reset()
+            self.counter.run()
+            if self.counter.expired:
+                self.spawn_lock = False
+                self.counter.reset()
