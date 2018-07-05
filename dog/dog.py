@@ -15,15 +15,14 @@ class Dog(GameObject):
         self.box_collider = BoxCollider(100, 100)
         self.returning = False
         self.velocity = (0, 0)
-        self.counter = FrameCounter(100)
+        self.counter = FrameCounter(200)
         self.spawn_lock = False
-        self.run_setup = [(3, 0), (-3, -3), (0, -3), (0, -3),
-                          (3, 0), (-3, 0), (0, 3), (0, 3)]
-        self.run_timer = FrameCounter(10)
+        self.run_setup = [(3, 0), (0, -3), (-3, 0), (0, 3)]
 
         # not stun
         self.stun_timer = FrameCounter(10)
         self.stun_timer.count = 10
+        self.index = 0
 
     def update(self):
         GameObject.update(self)
@@ -32,18 +31,6 @@ class Dog(GameObject):
         self.decide_movement()
 
     def move(self):
-
-        if self.stun_timer.expired:
-            for run in self.run_setup:
-                if self.run_timer.expired:
-                    self.velocity = run
-                    print(self.velocity)
-                    self.run_timer.reset()
-                else:
-                    self.run_timer.run()
-            # input movement here
-        else:
-            self.stun_timer.run()
 
         self.vx, self.vy = self.velocity
         self.y += self.vy
@@ -76,8 +63,11 @@ class Dog(GameObject):
     def decide_movement(self):
         if not self.spawn_lock:
             self.spawn_lock = True
-            
-                    
+            self.velocity = self.run_setup[self.index]
+            if self.index + 1 >= len(self.run_setup):
+                self.index = 0
+            else: 
+                self.index += 1
 
 
         if self.spawn_lock:
