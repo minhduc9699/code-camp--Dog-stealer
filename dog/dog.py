@@ -11,8 +11,8 @@ from frame_counter import FrameCounter
 class Dog(GameObject):
     def __init__(self, x, y):
         GameObject.__init__(self, x, y)
-        self.image = pygame.image.load("images/enemy.png")
-        self.box_collider = BoxCollider(100, 100)
+        self.image = pygame.image.load("images/doge.png")
+        self.box_collider = BoxCollider(70, 70)
         self.returning = False
         self.velocity = (0, 0)
         self.counter = FrameCounter(200)
