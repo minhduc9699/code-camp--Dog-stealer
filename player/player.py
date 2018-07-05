@@ -8,6 +8,8 @@ from physic.box_collider import BoxCollider
 from dog.dog import Dog
 from player.Shot2.shot2 import Shot2
 
+# from main import mouse
+
 class Player(GameObject):
     def __init__(self, x, y, input_manager):
         GameObject.__init__(self, x, y)
@@ -27,6 +29,12 @@ class Player(GameObject):
         self.shoot_left()
         self.shoot_right()
         self.physics()
+        # if self.has_shoot1 and self.has_shoot2:
+        #     mouse.image = mouse.all
+        # elif self.has_shoot1:
+        #     mouse.image = mouse.left
+        # elif self.has_shoot2:
+        #     mouse.image = mouse.right
 
     def move(self):
         dx = 0

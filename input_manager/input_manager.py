@@ -45,3 +45,4 @@ class InputManager:
           self.right_mouse_clicked = False
         
         self.mouse_x, self.mouse_y = pygame.mouse.get_pos()
+        pygame.mouse.set_visible(False)
