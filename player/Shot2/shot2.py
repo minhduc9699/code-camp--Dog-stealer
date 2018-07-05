@@ -42,7 +42,7 @@ class Shot2(GameObject):
                 # dog.deactivate()
                 distance1 = get_distance((self.x, self.y), (dog.x, dog.y))
                 dog.velocity = ((dog.x - self.x) / distance1 *
-                                20, (dog.y - self.y) / distance1 * 20)
+                                10, (dog.y - self.y) / distance1 * 10)
                 dog.stun_timer.reset()
                 dog.returning = False
 
